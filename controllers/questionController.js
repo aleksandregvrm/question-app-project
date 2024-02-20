@@ -10,7 +10,7 @@ const getAllQuestions = async (req, res) => {
     queryObject.questionType = questionType;
   }
   if (search) {
-    queryObject.question = search;
+    queryObject.question = { $regex : search, $options : "i"};
   }
   let allQuestions = await Question.find(queryObject);
   if (quizMode.toLowerCase() === "true") {

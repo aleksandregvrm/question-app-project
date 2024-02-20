@@ -39,7 +39,6 @@ const evaluateQuizStats = async (req, res) => {
 const getQuizStats = async (req, res) => {
   // const {id} = req.query;  
   const { userId: id,name } = req.user; 
-  console.log(name);
   // real solution
   // const id = "65cb441920d58ded265b8ef9";
   // TEMPORARY SOLUTION !!!!!!
@@ -63,8 +62,8 @@ const getLeaderBoardStats = async (req, res) => {
     },
     {
       $sort: {
-        averageQuizValue: -1,
         quizDoneAmount: -1,
+        averageQuizValue: -1,
       },
     },
     {
