@@ -54,7 +54,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.div {
+div {
   color: var(--primary-black);
   font-family: inherit;
   font-weight: 300;
@@ -71,6 +71,11 @@ h1 {
 }
 
 p {
+  font-family: inherit;
+  font-weight: 300;
+}
+input,textarea{
+  font-family: inherit;
   font-family: inherit;
   font-weight: 300;
 }

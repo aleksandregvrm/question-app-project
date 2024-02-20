@@ -67,11 +67,13 @@ export const customFetch = axios.create({
 export type AnswerType = {
     option: string;
     isCorrect: boolean;
+    _id?:string
 };
 export type QuestionSubmitInitialStateType = {
     question: string;
     questionType: string;
     answers: AnswerType[];
+    _id?:string
 };
 export interface AddSelectionInter {
     handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>, index?: number) => void;

@@ -3,10 +3,10 @@ import { reduxDispatch, useReduxSelector } from "../store"
 import { LeaderboardType, getLeaderboard, loadMoreList } from "../features/quizStats/quizStatsSlice"
 import Wrapper from "../wrappers/LeaderboardWrapper";
 import leaderboardIMG from "../assets/leaderboardpage.png";
-import { LeaderboardStats } from "../components";
+import { LeaderboardStats,Loading } from "../components";
 
 const Leaderboard = () => {
-  const { leaderboard,disableLoadMoreButton } = useReduxSelector((store) => store.quizStats);
+  const { leaderboard,disableLoadMoreButton,leaderboardIsLoading } = useReduxSelector((store) => store.quizStats);
   const dispatch = reduxDispatch();
   const loadMoreHandler = () => {
     dispatch(loadMoreList());
@@ -36,6 +36,7 @@ const Leaderboard = () => {
         <img className="leaderboard-img" alt="Leaderboard image" srcSet={leaderboardIMG} />
       </section>
       <section className="leaderboard-list">
+        {leaderboardIsLoading && <Loading/>}
         <h2>Best Quizers...</h2>
         {leaderboard.map((one:LeaderboardType)=>{
           const {name,role,quizDoneAmount,averageQuizValue,place,id} = one

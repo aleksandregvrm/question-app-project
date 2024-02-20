@@ -30,15 +30,18 @@ const Wrapper = styled.main`
         border-radius: 1.5rem;
         margin: 1rem auto;
     }
-    h2{
+    .leaderboard-list h2{
         font-size: 1.1rem;
-        /* font-size: 1.5rem; */
     }
-    h3{
+    .leaderboard-list h3{
         font-size: 1rem;
     }
     .leaderboard-img{
-        width: 120px;
+        width: 180px;
+        object-fit: cover;
+    }
+    .leaderboard-stat-img{
+        width: 110px;
         object-fit: cover;
     }
     .place{

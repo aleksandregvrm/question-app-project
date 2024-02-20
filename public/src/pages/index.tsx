@@ -6,4 +6,7 @@ import Verification from "./Verification";
 import ResetPassword from "./ResetPassword";
 import Leaderboard from "./Leaderboard";
 import AddQuestion from "./AddQuestion";
-export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion};
+import About from "./About";
+import AllQuestions from "./AllQuestions";
+import ProtectedRoute from "./ProtectedRoute";
+export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute};

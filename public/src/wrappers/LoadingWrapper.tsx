@@ -9,14 +9,13 @@ const spin = keyframes`
   }
 `;
 const Wrapper = styled.div`
+width: 100%;
   .loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100%;
+    height: 70vh;
   }
-
   .loading-spinner {
     border: 15px solid var(--primary-white);
     border-top: 15px solid var(--primary-black);
@@ -26,5 +25,4 @@ const Wrapper = styled.div`
     animation: ${spin} 0.5s linear infinite;
   }
 `;
-
 export default Wrapper;

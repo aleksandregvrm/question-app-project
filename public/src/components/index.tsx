@@ -6,5 +6,6 @@ import ProfileDetails from "./ProfileDetails";
 import LeaderboardStats from "./LeaderboardStats";
 import ProfileForm from "./ProfileForm";
 import QuestionSubmitForm from "./QuestionSubmitForm";
-
-export {Navbar,Footer,LoginStatus,Loading,ProfileDetails, LeaderboardStats,ProfileForm,QuestionSubmitForm};
+import AllQuestionsLoaded from "./AllQuestionsLoaded";
+import AllQuestionFilters from "./AllQuestionFilters";
+export {Navbar,Footer,LoginStatus,Loading,ProfileDetails, LeaderboardStats,ProfileForm,QuestionSubmitForm,AllQuestionsLoaded,AllQuestionFilters};

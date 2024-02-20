@@ -27,6 +27,7 @@ type InitialQuizStatsType = {
     detailsOpen: boolean,
     isLoading:boolean,
     leaderboard:LeaderboardType[],
+    leaderboardIsLoading:boolean,
     leaderboardListPart:number,
     disableLoadMoreButton:boolean
 }
@@ -45,6 +46,7 @@ const initialState: InitialQuizStatsType = {
     detailsOpen: false,
     isLoading:false,
     leaderboard:[],
+    leaderboardIsLoading:false,
     leaderboardListPart:1,
     disableLoadMoreButton:false,
 };
@@ -103,13 +105,20 @@ const quizStatsSlice = createSlice({
         builder.addCase(getQuizStats.rejected, (state) => {
             state.isLoading = false;
         });
+        builder.addCase(getLeaderboard.pending, (state) => {
+            state.leaderboardIsLoading = true;
+        });
         builder.addCase(getLeaderboard.fulfilled, (state,action) => {
+            state.leaderboardIsLoading = false;
             const {leaderboard} = action.payload.data;
             if(leaderboard.length < 1){
                 state.disableLoadMoreButton = true
                 return
             }
             state.leaderboard = [...state.leaderboard, ...leaderboard];
+        });
+        builder.addCase(getLeaderboard.rejected, (state) => {
+            state.leaderboardIsLoading = false;
         });
     },
 });

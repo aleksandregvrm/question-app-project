@@ -15,11 +15,11 @@ const NavLinks = () => {
             </NavLink></li>
             <li className='link'><NavLink to="/leaderboard">Leaderboard
             </NavLink></li>
-            <li className='link'><NavLink to="/">All Questions
+            <li className='link'><NavLink to="/all-questions">All Questions
             </NavLink></li>
             <li className='link'><NavLink to="/add-question">Add Question
             </NavLink></li>
-            <li className='link'><NavLink to="/">About
+            <li className='link'><NavLink to="/about">About
             </NavLink></li>
             {!role ? <li className='link'><NavLink to="/authorization">Log in
             </NavLink></li> : <li className='link'><NavLink to="/" onClick={() => dispatch(logoutUser())}>Log out

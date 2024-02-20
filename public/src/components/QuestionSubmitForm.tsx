@@ -3,7 +3,7 @@ import QuestionAddSelection from "./QuestionAddSelection";
 import QuestionAnswersInputs from "./QuestionAnswersInputs";
 import { QuestionSubmitInitialStateType } from "../utils/helperFunctions";
 import { reduxDispatch, useReduxSelector } from "../store";
-import { submitQuestion } from "../features/quiz/questionsSlice";
+import { submitQuestion } from "../features/questions/questionsSlice";
 
 const initialState: QuestionSubmitInitialStateType = {
     question: "",

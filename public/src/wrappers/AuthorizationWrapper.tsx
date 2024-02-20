@@ -39,5 +39,4 @@ const Wrapper = styled.main`
       margin-top: 1rem;
     }
 `
-
 export default Wrapper;

@@ -18,7 +18,7 @@ const LeaderboardStats = ({ name, role, quizDoneAmount, averageQuizValue, place 
   return (
     <div className={`leaderboard-list-container place${place}`}>
        <div className="name-img">
-        <img className="leaderboard-img" alt="user image" srcSet={usedPhoto} />
+        <img className="leaderboard-stat-img" alt="user image" srcSet={usedPhoto} />
         <h3>Name : <strong>{name}</strong></h3>
         <h3>Role : <strong>{role}</strong></h3>
        </div>
