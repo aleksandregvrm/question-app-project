@@ -10,8 +10,9 @@ const getAllQuestions = async (req, res) => {
     queryObject.questionType = questionType;
   }
   if (search) {
-    queryObject.question = { $regex : search, $options : "i"};
+    queryObject.question = search;
   }
+  console.log(queryObject);
   let allQuestions = await Question.find(queryObject);
   if (quizMode.toLowerCase() === "true") {
     const questionsLength = allQuestions.length;
