@@ -38,7 +38,7 @@ const evaluateQuizStats = async (req, res) => {
 // Get personal Quiz Stats
 const getQuizStats = async (req, res) => {
   // const {id} = req.query;  
-  const { userId: id,name } = req.user; 
+  const { userId: id } = req.user; 
   // real solution
   // const id = "65cb441920d58ded265b8ef9";
   // TEMPORARY SOLUTION !!!!!!

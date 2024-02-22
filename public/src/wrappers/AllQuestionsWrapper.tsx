@@ -65,6 +65,7 @@ const Wrapper = styled.main`
     .question-filter-form input{
         width: 80%;
         max-width: 300px;
+        height: 1.5rem;
     }
     .questions-next-prev{
         display: flex;

@@ -54,32 +54,24 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-div {
+div,img,label,p {
   color: var(--primary-black);
   font-family: inherit;
-  font-weight: 300;
-}
-img{
-  font-weight: 300;
-}
-label{
   font-weight: 300;
 }
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-p {
+input,textarea,select{
   font-family: inherit;
   font-weight: 300;
+  background: var(--primary-white);
+  color: var(--primary-black);
 }
-input,textarea{
-  font-family: inherit;
-  font-family: inherit;
-  font-weight: 300;
+select{
+  padding: 0.1rem;
 }
-
 h1,
 h2,
 h3,
@@ -102,7 +94,10 @@ img {
   width: 100%;
   height: 100%;
 }
-
+button{
+  background: var(--clr-grey-300);
+  color: var(--primary-black);
+}
 .btn {
   border-radius: 8px;
   padding: 0.4rem 0.4rem;
