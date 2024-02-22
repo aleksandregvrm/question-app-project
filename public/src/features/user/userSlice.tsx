@@ -109,7 +109,7 @@ const userSlice = createSlice({
             state.message = action.payload as string;
         });
         builder.addCase(logoutUser.fulfilled, (): InitialStateType => {
-            return { ...initialState }
+            return { ...initialState,role:"",name:"",email:"",userId:"" }
         });
         builder.addCase(registerUser.pending, (state) => {
             state.isLoading = true;

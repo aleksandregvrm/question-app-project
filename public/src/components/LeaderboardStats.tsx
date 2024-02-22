@@ -3,17 +3,13 @@ import adminIMG from "../assets/admin.png";
 import userIMG from "../assets/user.png";
 import questionGuruIMG from "../assets/guru.png";
 
-let usedPhoto:string
 const LeaderboardStats = ({ name, role, quizDoneAmount, averageQuizValue, place } : LeaderboardType) => {
-  console.log(role);
+  let usedPhoto:string = userIMG
   if(role === 'admin'){
     usedPhoto = adminIMG;
   }
   if(role === "question-guru"){
     usedPhoto = questionGuruIMG;
-  }
-  if(role === "user"){
-    usedPhoto = userIMG;
   }
   return (
     <div className={`leaderboard-list-container place${place}`}>
@@ -30,5 +26,4 @@ const LeaderboardStats = ({ name, role, quizDoneAmount, averageQuizValue, place 
     </div>
   )
 }
-
 export default LeaderboardStats
