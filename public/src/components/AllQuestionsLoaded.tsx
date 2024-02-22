@@ -1,43 +1,52 @@
-import { useReduxSelector } from '../store';
+import { useReduxSelector, reduxDispatch } from '../store';
 import { Loading } from "../components"
-import { FaPencilAlt,FaTimes } from 'react-icons/fa';
-// import { useState } from 'react';
-// import { QuestionSubmitInitialStateType } from '../utils/helperFunctions';
+import { ChangeEvent, useState, MouseEvent } from 'react';
+import { QuestionSubmitInitialStateType, AnswerType } from '../utils/helperFunctions';
+import { setEditingId } from '../features/questions/questionsSlice';
+import AllQuestionInputs from './AllQuestionInputs';
+import { handleAnswerChange } from '../utils/helperFunctions';
 
-
-// const initialState = {
-
-// }
+const initialQuestionState: QuestionSubmitInitialStateType = {
+  question: "",
+  answers: [
+    { option: "", isCorrect: false },
+    { option: "", isCorrect: false },
+    { option: "", isCorrect: false },
+    { option: "", isCorrect: false }
+  ]
+}
 const AllQuestionsLoaded = () => {
-  // const [values,setValues] = useState()
-  const {isLoading,allQuestions} = useReduxSelector((store)=>store.questions);
-  const {role} = useReduxSelector((store)=>store.user);
-  if(isLoading){
-    return <Loading/>
+  const [values, setValues] = useState<QuestionSubmitInitialStateType>(initialQuestionState)
+  const { isLoading, questionEditingId } = useReduxSelector((store) => store.questions);
+  const { role } = useReduxSelector((store) => store.user);
+  const dispatch = reduxDispatch();
+  if (isLoading) {
+    return <Loading />
   }
-  if(!role || role === "user"){
+  if (!role || role === "user") {
     return <div className='exemption-questions'>
-      <h2>Only Admin can access all the questions...</h2>
-      </div>
+      <h2>Only Admin and Question-guru can access all the questions...</h2>
+    </div>
+  }
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    const { name, value } = e.target;
+    return setValues(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+  const editButtonHandler = (e: MouseEvent<HTMLButtonElement>, question: string, answers: AnswerType[], id: string): void => {
+    e.preventDefault()
+    dispatch(setEditingId(id))
+    setValues({
+      question: question,
+      answers: answers.map(answer => ({ ...answer }))
+    });
   }
   return (
     <div className='questions'>
-      {allQuestions.map((questionOne)=>{
-        const {question,answers,_id:id} = questionOne;
-        return <article className="question" key={id}>
-          <button className='edit-button'><FaPencilAlt /></button>
-          <button className='delete-button'><FaTimes /></button>
-          <textarea className='question-text' disabled>{question}</textarea>
-          <div className="answers">
-            {answers.map((answerOne)=>{
-              const {option,isCorrect,_id:answerId} = answerOne;
-              return <input className='answer' key={answerId} type='text' value={option} style={{background:`${isCorrect && "green"}`}}/>
-      })}
-          </div>
-        </article>
-      })}
+      <AllQuestionInputs questionEditingId={questionEditingId}  editButtonHandler={editButtonHandler} handleChange={handleChange} handleAnswerChange={handleAnswerChange} values={values} setValues={setValues}/>
     </div>
   )
 }
-
 export default AllQuestionsLoaded

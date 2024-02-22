@@ -1,14 +1,21 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/helperFunctions";
 import { QuestionSubmitInitialStateType } from "../../utils/helperFunctions";
 import { toast } from "react-toastify";
+import { FilterStateType } from "../../utils/helperFunctions";
 
 type InitialQuizType = {
     allQuestions:QuestionSubmitInitialStateType[],
-    isLoading:boolean
+    search:string,
+    questionType:string,
+    questionEditingId:string,
+    isLoading:boolean,
 }
 const initialState: InitialQuizType = {
     allQuestions:[],
+    search:"",
+    questionType:"Math",
+    questionEditingId:"",
     isLoading:false
 };
 const submitQuestion = createAsyncThunk(
@@ -23,11 +30,13 @@ const submitQuestion = createAsyncThunk(
         }
     }
 );
-const getAllQuestions = createAsyncThunk("questionsSlice/getAllQuestions",async()=>{
+const getAllQuestions = createAsyncThunk("questionsSlice/getAllQuestions",async(_,thunkAPI)=>{
     try {
-        const response = await customFetch.get(`/questions?quizMode=false&questionType=History`);
-        console.log(response.data);
-        
+        const state = thunkAPI.getState() as { questions: InitialQuizType };
+        const {search,questionType} = state.questions;
+        console.log(search,questionType);
+        const response = await customFetch.get(`/questions?quizMode=false&questionType=${questionType}&search=${search}`);
+        console.log(response);
         return {data: response.data}
     } catch (error: any) {
         
@@ -37,7 +46,16 @@ const questionsSlice = createSlice({
     name: "quizStatsSlice",
     initialState,
     reducers: {
-        
+        changeFilters: (state, action: PayloadAction<FilterStateType>):void => {
+          const {search,questionType} = action.payload;
+          console.log(search,questionType);
+          state.search = search;
+          state.questionType = questionType;
+        },
+        setEditingId : (state, action:PayloadAction<string>):void=>{
+           const id = action.payload
+           state.questionEditingId = id;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getAllQuestions.pending, (state) => {
@@ -54,7 +72,8 @@ const questionsSlice = createSlice({
     }
 });
 export const {
-    
+    changeFilters,
+    setEditingId
 } = questionsSlice.actions;
 export { submitQuestion, getAllQuestions };
 export default questionsSlice.reducer;

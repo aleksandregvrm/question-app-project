@@ -58,7 +58,8 @@ const Wrapper = styled.main`
     .question-filter-form{
         display: flex;
         flex-wrap: wrap;
-        max-width: 600px;
+        align-items: center;
+        max-width: 700px;
         gap: 0.5rem;
     }
     .question-filter-form input{
@@ -103,6 +104,10 @@ const Wrapper = styled.main`
       right: 25%;
       cursor: pointer;
       visibility:hidden;
+    }
+    .additional-btn{
+        margin-top: 0.3rem;
+        margin-left: 1rem;
     }
     .question:hover .edit-button{
         visibility: visible;

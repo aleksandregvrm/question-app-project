@@ -1,15 +1,16 @@
 import Wrapper from "../wrappers/AllQuestionsWrapper";
-import { reduxDispatch } from "../store";
+import { reduxDispatch,useReduxSelector } from "../store";
 import { AllQuestionsLoaded,AllQuestionFilters } from "../components";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { getAllQuestions } from "../features/questions/questionsSlice";
 import { useEffect } from "react";
 
 const AllQuestions = () => {
+    const {search,questionType} = useReduxSelector((store)=>store.questions)
     const dispatch = reduxDispatch();
     useEffect(()=>{
       dispatch(getAllQuestions())
-    },[])
+    },[search,questionType])
     return (
         <Wrapper>
             <section className="all-questions-header">

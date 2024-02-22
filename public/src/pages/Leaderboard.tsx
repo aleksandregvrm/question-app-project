@@ -36,13 +36,13 @@ const Leaderboard = () => {
         <img className="leaderboard-img" alt="Leaderboard image" srcSet={leaderboardIMG} />
       </section>
       <section className="leaderboard-list">
-        {leaderboardIsLoading && <Loading/>}
         <h2>Best Quizers...</h2>
         {leaderboard.map((one:LeaderboardType)=>{
           const {name,role,quizDoneAmount,averageQuizValue,place,id} = one
           return <LeaderboardStats key={id} name={name} role={role} quizDoneAmount={quizDoneAmount} averageQuizValue={averageQuizValue} place={place} id={id}/>
         })}
         {!disableLoadMoreButton ? <button disabled={disableLoadMoreButton} onClick={loadMoreHandler} className="btn">Load more...</button> : null}
+        {leaderboardIsLoading && <Loading />}
       </section>
     </Wrapper>
   )

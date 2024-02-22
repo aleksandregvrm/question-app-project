@@ -1,6 +1,7 @@
 import { MouseEvent,ChangeEvent } from "react"
 import axios from "axios";
 
+// Input Textarea onChange
 export type InitialStateType = {
     email: string,
     name: string,
@@ -17,10 +18,14 @@ export type HandleChangeType = {
     target: {
         name: string;
         value: string;
-        type:unknown
+        type: unknown
     };
 }
-export type UseStateType = InitialStateType | ResetPasswordStateType | ProfileFormType;
+export type FilterStateType = {
+    search: string,
+    questionType: string,
+}
+export type UseStateType = InitialStateType | ResetPasswordStateType | ProfileFormType | FilterStateType | QuestionSubmitInitialStateType;
 
 export const handleChange = <T extends UseStateType>(
     e: HandleChangeType,
@@ -33,6 +38,7 @@ export const handleChange = <T extends UseStateType>(
         [name]: valueType,
     }));
 };
+// Input Text area onChange End
 // Handle Change Inputs
 
 export type AuthStateType = {
@@ -54,13 +60,14 @@ export const setAuth = (e: MouseEvent<HTMLElement>, setAuthType: React.Dispatch<
         return updatedAuthType;
     });
 };
+// Handle Change Inputs End
 // Change Auth Type
 const productionURL:string = "http://localhost:5002/api/v1";
 
 export const customFetch = axios.create({
     baseURL:productionURL
 })
-// 
+// Change Auth Type End
 
 
 // Question Add stuff
@@ -71,7 +78,7 @@ export type AnswerType = {
 };
 export type QuestionSubmitInitialStateType = {
     question: string;
-    questionType: string;
+    questionType?: string;
     answers: AnswerType[];
     _id?:string
 };
@@ -79,5 +86,16 @@ export interface AddSelectionInter {
     handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>, index?: number) => void;
     values: QuestionSubmitInitialStateType;
 }
-//
+
+export const handleAnswerChange = (e: ChangeEvent<HTMLInputElement>, index: number, setValues: React.Dispatch<React.SetStateAction<QuestionSubmitInitialStateType>>):void => {
+    const { value } = e.target;
+    setValues(prevState => ({
+        ...prevState,
+        answers: prevState.answers.map((answer, i) => ({
+            ...answer,
+            option: i === index ? value : answer.option
+        }))
+    }));
+};
+// Question Add stuff End
 
