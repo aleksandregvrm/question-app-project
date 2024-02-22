@@ -62,7 +62,7 @@ export const setAuth = (e: MouseEvent<HTMLElement>, setAuthType: React.Dispatch<
 };
 // Handle Change Inputs End
 // Change Auth Type
-const productionURL:string = "http://localhost:5002/api/v1";
+const productionURL: string = "/api/v1";
 
 export const customFetch = axios.create({
     baseURL:productionURL
