@@ -21,11 +21,6 @@ const adminRouter = require ('./routes/adminRoutes');
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 app.use(mongoSanitize());
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
