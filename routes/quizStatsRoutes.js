@@ -13,8 +13,8 @@ const router = express.Router();
 router
   .route("/")
   .get(
-    // authenticateUser,
-    // authorizePermissions("admin", "user", "question-guru"),
+    authenticateUser,
+    authorizePermissions("admin", "user", "question-guru"),
     getQuizStats
   );
 router

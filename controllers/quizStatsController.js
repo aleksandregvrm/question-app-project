@@ -38,13 +38,14 @@ const evaluateQuizStats = async (req, res) => {
 // Get personal Quiz Stats
 const getQuizStats = async (req, res) => {
   const { userId: id } = req.user; 
+  console.log(req.user);
   // real solution
-  // const id = "65cb441920d58ded265b8ef9";
+  // const id = "65c7a042f0b9c4c22bf29ca2";
   // TEMPORARY SOLUTION !!!!!!
   // change this on production !!!!!
   const personalQuizStats = await QuizStats.findOne({ user: id });
   if (!personalQuizStats) {
-    throw new CustomError.BadRequestError(`Cannot find stats with and if of ${id}`)
+    throw new CustomError.BadRequestError(`Cannot find stats with and id of ${id}`)
   }
   res.status(StatusCodes.OK).json(personalQuizStats);
 };
