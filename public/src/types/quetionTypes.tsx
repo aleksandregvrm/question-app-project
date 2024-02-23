@@ -1,5 +1,5 @@
-import { MouseEvent,ChangeEvent } from "react"
-import { AnswerType,QuestionSubmitInitialStateType } from "../utils/helperFunctions"
+import { MouseEvent, ChangeEvent } from "react"
+import { AnswerType, QuestionSubmitInitialStateType } from "../utils/helperFunctions"
 
 // Questions 
 export interface AllQuestionInputsInter {

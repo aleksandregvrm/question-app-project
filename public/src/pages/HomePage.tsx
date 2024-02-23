@@ -3,6 +3,7 @@ import leaderboardImg from "../assets/leaderboard.png";
 import boxesImg from "../assets/boxes.png";
 
 const HomePage = () => {
+  
   return (
     <Wrapper>
     <section className="home-text">

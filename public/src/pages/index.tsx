@@ -9,4 +9,5 @@ import AddQuestion from "./AddQuestion";
 import About from "./About";
 import AllQuestions from "./AllQuestions";
 import ProtectedRoute from "./ProtectedRoute";
-export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute};
+import QuizCategory from "./QuizCategory";
+export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute,QuizCategory};

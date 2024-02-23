@@ -14,7 +14,7 @@ const ProfileDetails = () => {
     const gapLength = 16;
     if (divHeight && questionsContainerRef.current) {
       if (detailsOpen) {
-        questionsContainerRef.current.style.height = `${(divHeight * questionsUsedLength) + 105 + 
+        questionsContainerRef.current.style.height = `${(divHeight * questionsUsedLength) + 125 + 
           (questionsUsedLength * gapLength)}px`;
       } else {
         questionsContainerRef.current.style.height = "0px";
