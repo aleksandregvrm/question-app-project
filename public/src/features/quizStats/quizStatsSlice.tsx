@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/helperFunctions";
-type QuestionType = {
-    question: string,
+export type QuestionType = {
+    question?: string,
     answerSubmitted: string,
-    answerIsTrue: boolean
+    answerIsTrue: boolean,
+    id?:string,
 }
 type lastQuizResult = {
     lastQuizCorrectAnswers: number,

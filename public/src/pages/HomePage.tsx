@@ -2,8 +2,7 @@ import Wrapper from "../wrappers/HomePageWrapper";
 import leaderboardImg from "../assets/leaderboard.png";
 import boxesImg from "../assets/boxes.png";
 
-const HomePage = () => {
-  
+const HomePage = () => {  
   return (
     <Wrapper>
     <section className="home-text">

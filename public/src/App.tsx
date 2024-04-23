@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,QuizCategory} from "./pages";
+import {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,QuizCategory,QuizGameOn} from "./pages";
 import Error from "./errors/Error";
 
 const router = createBrowserRouter([
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
           },
           {
             path:"game-on",
-            element:"darchibaldi",
+            element:<QuizGameOn/>,
             errorElement:<Error/>
           }
         ]

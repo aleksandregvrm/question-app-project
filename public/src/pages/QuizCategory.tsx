@@ -1,8 +1,15 @@
 import Wrapper from "../wrappers/QuizCategoryWrapper";
 import  {categoryImages}  from "../utils/otherStats";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { reduxDispatch } from "../store";
+import { checkPermission,sendEvaluatedStats } from "../features/quizGame/quizGameSlice";
 
 const QuizCategories = () => {
+  const dispatch = reduxDispatch();
+  useEffect(()=>{
+   dispatch(checkPermission());
+  },[])
   return (
     <Wrapper>
       <section className="category-header">
@@ -11,7 +18,7 @@ const QuizCategories = () => {
       </section>
       <section className="categories">
         {categoryImages.map((image)=>{
-          return <article className="category">
+          return <article onClick={()=>dispatch(sendEvaluatedStats())}className="category">
             <NavLink to="game-on">
             <img alt="category image" srcSet={image} />
             </NavLink>

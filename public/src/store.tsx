@@ -3,12 +3,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userSlice from "./features/user/userSlice";
 import quizStatsSlice from "./features/quizStats/quizStatsSlice";
 import questionsSlice from "./features/questions/questionsSlice";
+import quizGameSlice from "./features/quizGame/quizGameSlice";
 
 export const store = configureStore({
     reducer: {
         user:userSlice,
         quizStats:quizStatsSlice,
-        questions:questionsSlice
+        questions:questionsSlice,
+        quizGame:quizGameSlice
     },
 });
 

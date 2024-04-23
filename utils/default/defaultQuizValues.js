@@ -1,7 +1,7 @@
 const defaultQuizValues = (userId) => {
   return {
     user: userId,
-    quizDoneAmount: 0,
+    quizDoneAmount: 1,
     totalQuizPoints: 0,
     averageQuizValue: 0,
     lastQuizResult: {
@@ -9,6 +9,7 @@ const defaultQuizValues = (userId) => {
       lastQuizDoneDate: new Date(),
       questionsUsed: [],
     },
+    dailyQuizAmount:1
   };
 };
 module.exports = defaultQuizValues;

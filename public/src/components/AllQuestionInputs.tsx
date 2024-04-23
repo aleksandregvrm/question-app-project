@@ -10,7 +10,7 @@ const AllQuestionInputs = ({questionEditingId, editButtonHandler,handleChange,ha
                 const { question, answers, _id: id } = questionOne;
                 return (
                     <article className="question" key={id}>
-                        <button className='edit-button' onClick={(e) => editButtonHandler(e, question, answers, id as string)}>
+                        <button className='edit-button' onClick={(e) => editButtonHandler(e, question as string, answers, id as string)}>
                             <FaPencilAlt />
                         </button>
                         <button className='delete-button'>

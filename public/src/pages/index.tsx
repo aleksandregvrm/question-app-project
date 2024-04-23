@@ -10,4 +10,5 @@ import About from "./About";
 import AllQuestions from "./AllQuestions";
 import ProtectedRoute from "./ProtectedRoute";
 import QuizCategory from "./QuizCategory";
-export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute,QuizCategory};
+import QuizGameOn from "./QuizGameOn";
+export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute,QuizCategory,QuizGameOn};

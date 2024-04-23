@@ -1,4 +1,4 @@
-import { MouseEvent,ChangeEvent } from "react"
+import { MouseEvent, ChangeEvent } from "react"
 import axios from "axios";
 
 // Input Textarea onChange
@@ -42,9 +42,9 @@ export const handleChange = <T extends UseStateType>(
 // Handle Change Inputs
 
 export type AuthStateType = {
-    login:boolean,
-    register:boolean,
-    forgotPassword:boolean
+    login: boolean,
+    register: boolean,
+    forgotPassword: boolean
 }
 
 export const setAuth = (e: MouseEvent<HTMLElement>, setAuthType: React.Dispatch<React.SetStateAction<AuthStateType>>) => {
@@ -62,32 +62,32 @@ export const setAuth = (e: MouseEvent<HTMLElement>, setAuthType: React.Dispatch<
 };
 // Handle Change Inputs End
 // Change Auth Type
-const productionURL:string = "/api/v1";
+const productionURL: string = "http://localhost:5002/api/v1";
 
 export const customFetch = axios.create({
-    baseURL:productionURL
+    baseURL: productionURL
 })
 // Change Auth Type End
 
-
 // Question Add stuff
 export type AnswerType = {
+    question?: string;
     option: string;
     isCorrect: boolean;
-    _id?:string
+    _id?: string;
 };
 export type QuestionSubmitInitialStateType = {
-    question: string;
-    questionType?: string;
-    answers: AnswerType[];
-    _id?:string
+    question?:string
+    questionType?: string
+    answers: AnswerType[]
+    _id?: string
 };
 export interface AddSelectionInter {
     handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>, index?: number) => void;
     values: QuestionSubmitInitialStateType;
 }
 
-export const handleAnswerChange = (e: ChangeEvent<HTMLInputElement>, index: number, setValues: React.Dispatch<React.SetStateAction<QuestionSubmitInitialStateType>>):void => {
+export const handleAnswerChange = (e: ChangeEvent<HTMLInputElement>, index: number, setValues: React.Dispatch<React.SetStateAction<QuestionSubmitInitialStateType>>): void => {
     const { value } = e.target;
     setValues(prevState => ({
         ...prevState,

@@ -18,4 +18,4 @@ export const optionValues: string[] = ["Math",
 "Physics",
 "Other"];
 
-export const categoryImages = [mathPNG,historyPNG,geographyPNG,physicsPNG,chemistryPNG,artPNG,literaturePNG,sportPNG,otherPNG]
+export const categoryImages:string[] = [mathPNG,historyPNG,geographyPNG,physicsPNG,chemistryPNG,artPNG,literaturePNG,sportPNG,otherPNG]

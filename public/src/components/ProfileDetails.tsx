@@ -11,11 +11,9 @@ const ProfileDetails = () => {
   const questionsUsedLength = questionsUsed.length;
   useEffect(() => {
     const divHeight = questionsRef.current?.getBoundingClientRect().height;
-    const gapLength = 16;
     if (divHeight && questionsContainerRef.current) {
       if (detailsOpen) {
-        questionsContainerRef.current.style.height = `${(divHeight * questionsUsedLength) + 125 + 
-          (questionsUsedLength * gapLength)}px`;
+        questionsContainerRef.current.style.height = `auto`;
       } else {
         questionsContainerRef.current.style.height = "0px";
       }

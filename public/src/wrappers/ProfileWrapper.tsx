@@ -38,8 +38,10 @@ const Wrapper = styled.main`
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: auto;
     }
     .user-summary{
+        margin: 0 auto;
         margin-top: 2rem;
     }
     .user-summary h2{
@@ -53,7 +55,7 @@ const Wrapper = styled.main`
         border-radius: 1rem;
         padding: 0.5rem;
         height: 0;
-        transition: var(--transition);
+        /* transition: var(--transition); */
         visibility: hidden;
         overflow: hidden;
     }
