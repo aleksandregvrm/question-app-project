@@ -42,11 +42,15 @@ const QuizStatsSchema = new mongoose.Schema(
     quizDoneAmount: {
       type: Number,
       required: [true, "Please provide how many quizes have you done"],
+    },
+    dailyQuizAmount: {
+      type: Number,
+      required: [true, "Please provide how many quiz have you done"],
       validate: {
         validator: function (value) {
           return value <= 2;
         },
-        message: "Daily quiz amount cannot exceed 2",
+        message: "Daily quiz amount must not be more than 2",
       },
     },
     totalQuizPoints: {

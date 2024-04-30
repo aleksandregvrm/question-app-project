@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
     verificationToken,
   });
   console.log(user);
-  const origin = "http://localhost:5173";
+  const origin = "https://question-app-project-1.onrender.com";
   await sendVerificationEmail({
     name: user.name,
     email: user.email,

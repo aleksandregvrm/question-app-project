@@ -17,6 +17,9 @@ const Wrapper = styled.main`
         cursor: pointer;
         border: 1px solid var(--primary-black);
     }
+    h4{
+      color:red;
+    }
     
 `
 export default Wrapper;

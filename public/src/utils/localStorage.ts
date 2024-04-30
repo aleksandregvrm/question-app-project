@@ -13,3 +13,13 @@ export const getUserFromLocalStorage = ():LoginActionType => {
     const user:LoginActionType = result ? JSON.parse(result) : '';
     return user;
 };
+// USER RELATED
+
+export const addSubmittedToLocalStorage = (submitted:number)=>{
+    localStorage.setItem("submittedAnswers", JSON.stringify(submitted));
+};
+
+export const getSumbittedFromLocalStorage = () => {
+    const savedState = localStorage.getItem("submittedAnswers");
+    return savedState ? JSON.parse(savedState) : null;
+}

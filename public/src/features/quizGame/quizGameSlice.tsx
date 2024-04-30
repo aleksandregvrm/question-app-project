@@ -37,7 +37,7 @@ const checkPermission = createAsyncThunk("quizGameSlice/quizPermission", async (
         const response = await customFetch.get('/quizStats/checkQuizPermission');
         return { data: response.data }
     } catch (error: any) {
-        toast.error(error.response.data.msg)
+        // toast.error(error.response.data.msg)
         throw error;
     }
 });
@@ -65,7 +65,7 @@ const sendEvaluatedStats = createAsyncThunk(
             const response = await customFetch.post(`/quizStats/evaluate`, { quizCorrectAnswers: correctAnswers, usedQuestions: answeredQuestions, quizDone });
             return { data: response.data }
         } catch (error: any) {
-            toast.error(error.response.data.msg)
+            // toast.error(error.response.data.msg)
             throw error;
         }
     }
@@ -82,9 +82,6 @@ const quizGameSlice = createSlice({
             }
             state.answeredQuestions.push({ answerSubmitted, answerIsTrue, question });
         },
-        skipQuestion: (state) => {
-            state.answersSubmitted++;
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(getQuestion.pending, (state) => {
@@ -119,7 +116,7 @@ const quizGameSlice = createSlice({
     }
 });
 export const {
-    evaluateQuestion, skipQuestion
+    evaluateQuestion
 } = quizGameSlice.actions;
 export { getQuestion, sendEvaluatedStats, checkPermission };
 export default quizGameSlice.reducer;

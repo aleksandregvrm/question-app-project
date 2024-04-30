@@ -8,8 +8,8 @@ export type QuestionType = {
 }
 type lastQuizResult = {
     lastQuizCorrectAnswers: number,
-    lastQuizDoneDate: Date | null
-    questionsUsed: QuestionType[]
+    lastQuizDoneDate: Date | null,
+    questionsUsed: QuestionType[],
 }
 export type LeaderboardType = {
     name:string,
@@ -30,7 +30,7 @@ type InitialQuizStatsType = {
     leaderboard:LeaderboardType[],
     leaderboardIsLoading:boolean,
     leaderboardListPart:number,
-    disableLoadMoreButton:boolean
+    disableLoadMoreButton:boolean,
 }
 const initialLastQuizResult: lastQuizResult = {
     lastQuizCorrectAnswers: 0,

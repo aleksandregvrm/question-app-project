@@ -15,11 +15,11 @@ const checkQuizPermission = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "Proceed!" });
   }
   const {
-    quizDoneAmount,
+    dailyQuizAmount,
     lastQuizResult: { lastQuizDoneDate },
   } = personalQuizStats;
   const lastQuizDay = lastQuizDoneDate.getDate();
-  if(quizDoneAmount !== 2){
+  if (dailyQuizAmount !== 2) {
     res.status(StatusCodes.OK).json({ msg: "Proceed!" });
   }
   if (dayNow === lastQuizDay) {
@@ -27,7 +27,7 @@ const checkQuizPermission = async (req, res) => {
       "You have reached the daily limit, try again tomorrow!"
     );
   }
-  personalQuizStats.quizDoneAmount = 0;
+  personalQuizStats.dailyQuizAmount = 0;
   personalQuizStats.lastQuizResult.lastQuizDoneDate = new Date();
   await personalQuizStats.save();
   res.status(StatusCodes.OK).json({ msg: "Proceed!" });
@@ -54,13 +54,12 @@ const evaluateQuizStats = async (req, res) => {
     });
     return res.status(StatusCodes.CREATED).json({ msg: "Quiz Stats Created" });
   }
-  if (personalQuizStats.lastQuizResult.quizDoneAmount === 2) {
+  if (personalQuizStats.dailyQuizAmount === 2) {
     throw new CustomError.BadRequestError(
       "You have reached the daily limit please try again tomorrow!"
     );
   }
   if (quizDone) {
-    personalQuizStats.quizDoneAmount += 1;
     personalQuizStats.name = name;
     personalQuizStats.totalQuizPoints += quizCorrectAnswers;
     personalQuizStats.averageQuizValue = (
@@ -70,7 +69,10 @@ const evaluateQuizStats = async (req, res) => {
       quizCorrectAnswers;
     personalQuizStats.lastQuizResult.lastQuizDoneDate = new Date();
     personalQuizStats.lastQuizResult.questionsUsed = usedQuestions;
+    return res.status(StatusCodes.OK).json({ msg: "Values Calculated" });
   }
+  personalQuizStats.quizDoneAmount += 1;
+  personalQuizStats.dailyQuizAmount += 1;
   await personalQuizStats.save();
   res.status(StatusCodes.OK).json({ msg: "Values Calculated" });
 };
