@@ -6,7 +6,7 @@ const CustomError = require("../errors");
 
 // Check for quiz permission
 const checkQuizPermission = async (req, res) => {
-  const {userId:id,name} = req.user;
+  const {userId:id} = req.user;
   // const temporaryId = "65c7a042f0b9c4c22bf29ca2";
   // Temporary solution
   const dayNow = new Date().getDate();
@@ -54,11 +54,11 @@ const evaluateQuizStats = async (req, res) => {
     });
     return res.status(StatusCodes.CREATED).json({ msg: "Quiz Stats Created" });
   }
-  if (personalQuizStats.dailyQuizAmount === 2) {
-    throw new CustomError.BadRequestError(
-      "You have reached the daily limit please try again tomorrow!"
-    );
-  }
+  // if (personalQuizStats.dailyQuizAmount === 2) {
+  //   throw new CustomError.BadRequestError(
+  //     "You have reached the daily limit please try again tomorrow!"
+  //   );
+  // }
   if (quizDone) {
     personalQuizStats.name = name;
     personalQuizStats.totalQuizPoints += quizCorrectAnswers;
@@ -69,10 +69,14 @@ const evaluateQuizStats = async (req, res) => {
       quizCorrectAnswers;
     personalQuizStats.lastQuizResult.lastQuizDoneDate = new Date();
     personalQuizStats.lastQuizResult.questionsUsed = usedQuestions;
+    await personalQuizStats.save();
     return res.status(StatusCodes.OK).json({ msg: "Values Calculated" });
   }
   personalQuizStats.quizDoneAmount += 1;
   personalQuizStats.dailyQuizAmount += 1;
+  personalQuizStats.averageQuizValue = (
+    personalQuizStats.totalQuizPoints / personalQuizStats.quizDoneAmount
+  ).toFixed(1);
   await personalQuizStats.save();
   res.status(StatusCodes.OK).json({ msg: "Values Calculated" });
 };
@@ -104,9 +108,15 @@ const getLeaderBoardStats = async (req, res) => {
       },
     },
     {
+      $addFields: {
+        multipliedValue: {
+          $multiply: ["$averageQuizValue", "$quizDoneAmount"],
+        },
+      },
+    },
+    {
       $sort: {
-        quizDoneAmount: -1,
-        averageQuizValue: -1,
+        multipliedValue: -1,
       },
     },
     {

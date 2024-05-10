@@ -1,25 +1,36 @@
 import { LoginActionType } from "../features/user/userSlice";
 
-export const addUserToLocalStorage = (user:LoginActionType) => {
-    localStorage.setItem("user", JSON.stringify(user));
+export const checkForItemInLocalStorage = (item: string): boolean => {
+    const result = localStorage.getItem(item);
+    if (result) {
+        return true
+    }
+    return false
+}
+
+export const addItemToLocalStorage = (item: string | LoginActionType, storageName: string) => {
+    localStorage.setItem(storageName, JSON.stringify(item));
 };
 
-export const removeUserFromLocalStorage = () => {
-    return localStorage.removeItem("user");
+export const removeItemFromLocalStorage = (item: string) => {
+    return localStorage.removeItem(item);
 };
 
-export const getUserFromLocalStorage = ():LoginActionType => {
+// User Specific
+export const getUserFromLocalStorage = (): LoginActionType => {
     const result = localStorage.getItem("user");
-    const user:LoginActionType = result ? JSON.parse(result) : '';
+    const user: LoginActionType = result ? JSON.parse(result) : '';
     return user;
 };
-// USER RELATED
+// User Specific End
 
-export const addSubmittedToLocalStorage = (submitted:number)=>{
-    localStorage.setItem("submittedAnswers", JSON.stringify(submitted));
-};
-
-export const getSumbittedFromLocalStorage = () => {
-    const savedState = localStorage.getItem("submittedAnswers");
-    return savedState ? JSON.parse(savedState) : null;
+// Quiz Game Specific
+export const getCategoryFromLocalStorage = (): string => {
+    const result = localStorage.getItem("category");
+    const retrievedItem: string = result ? JSON.parse(result) : '';
+    return retrievedItem;
 }
+// Quiz Game Specific End
+
+
+// USER RELATED

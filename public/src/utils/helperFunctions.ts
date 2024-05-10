@@ -1,4 +1,5 @@
 import { MouseEvent, ChangeEvent } from "react"
+import { adminText,questionGuruText,userText } from "./otherStats";
 import axios from "axios";
 
 // Input Textarea onChange
@@ -62,7 +63,7 @@ export const setAuth = (e: MouseEvent<HTMLElement>, setAuthType: React.Dispatch<
 };
 // Handle Change Inputs End
 // Change Auth Type
-const productionURL: string = "http://localhost:5002/api/v1";
+const productionURL: string = "/api/v1";
 
 export const customFetch = axios.create({
     baseURL: productionURL
@@ -77,7 +78,7 @@ export type AnswerType = {
     _id?: string;
 };
 export type QuestionSubmitInitialStateType = {
-    question?:string
+    question?: string
     questionType?: string
     answers: AnswerType[]
     _id?: string
@@ -98,4 +99,42 @@ export const handleAnswerChange = (e: ChangeEvent<HTMLInputElement>, index: numb
     }));
 };
 // Question Add stuff End
+
+// Additional functions regarding the Quiz stats...
+
+export const evaluateLastQuizPoints = (num: number): string => {
+    if(num === 0){
+        return 'TBD'
+    }
+    if (num <= 4) {
+        return 'Horrible Performance'
+    }
+    if(num <= 6){
+        return 'Average Performance'
+    }
+    if(num <=8){
+        return 'Great Performance'
+    }
+    if(num === 9){
+        return 'Almost Perfect'
+    }
+    return 'Superb Performance'
+}
+
+// Additional functions regarding the Quiz stats... end
+
+// Quizing Eligibility check
+
+export const eligibilityCheck = (role:string,quizDoneAmount:number):string => {
+  if(role === 'admin'){
+    return adminText
+  }
+  if(role === 'question-guru'){
+    return questionGuruText
+  }
+  return userText(quizDoneAmount)
+}
+
+// Quizing Eligibility check End
+
 

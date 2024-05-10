@@ -32,7 +32,6 @@ const registerUser = async (req, res) => {
     role,
     verificationToken,
   });
-  console.log(user);
   const origin = "https://question-app-project-1.onrender.com";
   await sendVerificationEmail({
     name: user.name,
@@ -41,7 +40,6 @@ const registerUser = async (req, res) => {
     origin,
   });
   res.status(StatusCodes.CREATED).json({ user: { name, email } });
-  res.send("dachi ylea");
 };
 // Verify User
 const verifyUser = async (req, res) => {

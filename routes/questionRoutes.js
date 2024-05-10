@@ -3,6 +3,7 @@ const {
   getAllQuestions,
   getSingleQuestion,
   uploadQuestion,
+  editQuestion,
 } = require("../controllers/questionController");
 const {
   authenticateUser,
@@ -28,6 +29,11 @@ router
     authenticateUser,
     authorizePermissions("admin", "question-guru"),
     getSingleQuestion
+  )
+  .patch(
+    authenticateUser,
+    authorizePermissions("admin", "question-guru"),
+    editQuestion
   );
 
 module.exports = router;

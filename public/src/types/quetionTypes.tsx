@@ -8,6 +8,7 @@ export interface AllQuestionInputsInter {
     handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
     handleAnswerChange: (e: ChangeEvent<HTMLInputElement>, answerIndex: number, setValues: React.Dispatch<React.SetStateAction<QuestionSubmitInitialStateType>>) => void,
     values: QuestionSubmitInitialStateType,
-    setValues: React.Dispatch<React.SetStateAction<QuestionSubmitInitialStateType>>
+    setValues: React.Dispatch<React.SetStateAction<QuestionSubmitInitialStateType>>,
+    editQuestionHandler: () => void;
 }
 // Questions end

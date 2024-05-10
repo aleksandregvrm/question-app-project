@@ -1,16 +1,20 @@
 import Wrapper from "../wrappers/QuizCategoryWrapper";
-import  {categoryImages}  from "../utils/otherStats";
+import { categoryImagesArr } from "../utils/otherStats";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { reduxDispatch,useReduxSelector } from "../store";
-import { checkPermission,sendEvaluatedStats } from "../features/quizGame/quizGameSlice";
+import { reduxDispatch, useReduxSelector } from "../store";
+import { checkPermission, sendEvaluatedStats, saveCategory } from "../features/quizGame/quizGameSlice";
 
 const QuizCategories = () => {
-  const {quizState} = useReduxSelector((store)=>store.quizGame);
+  const { quizState } = useReduxSelector((store) => store.quizGame);
   const dispatch = reduxDispatch();
-  useEffect(()=>{
-   dispatch(checkPermission());
-  },[])
+  useEffect(() => {
+    dispatch(checkPermission());
+  }, [])
+  const categoryClickHandler = (category: string) => {
+    dispatch(saveCategory(category))
+    dispatch(sendEvaluatedStats())
+  }
   return (
     <Wrapper>
       <section className="category-header">
@@ -19,10 +23,11 @@ const QuizCategories = () => {
         {!quizState && <h4>You cannot play the game right now, You are either unauthenticated or have reached the limit</h4>}
       </section>
       <section className="categories">
-        {categoryImages.map((image)=>{
-          return <article onClick={()=>dispatch(sendEvaluatedStats())}className="category">
+        {categoryImagesArr.map((imageObj:Record<string,string>) => {
+          const {category,img:image} = imageObj
+          return <article onClick={() => categoryClickHandler(category)} className="category">
             <NavLink to="game-on">
-            <img alt="category image" srcSet={image} />
+              <img alt="category image" srcSet={image} />
             </NavLink>
           </article>
         })}
@@ -30,5 +35,4 @@ const QuizCategories = () => {
     </Wrapper>
   )
 }
-
 export default QuizCategories

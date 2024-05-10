@@ -4,13 +4,13 @@ import guruImg from "../assets/guru.png";
 import adminImg from "../assets/admin.png";
 import { useReduxSelector } from '../store';
 import { ProfileDetails, ProfileForm } from '../components';
+import { eligibilityCheck } from '../utils/helperFunctions';
 
 let userStatus: string = 'user';
 let userPhoto: string = userImg;
 const Profile = () => {
     const { role, name } = useReduxSelector((store) => store.user);
     const { averageQuizValue, totalQuizPoints, quizDoneAmount } = useReduxSelector((store) => store.quizStats);
-    console.log(role);
     userStatus = role;
     if (!userStatus) {
         return <Wrapper>
@@ -43,7 +43,7 @@ const Profile = () => {
                 </section>
                 <section className="user-summary">
                     <h2>{name}'s Summary</h2>
-                    <p>You are doing quite well, you have already completed {quizDoneAmount} quizes and soon after {100 - quizDoneAmount} more quizes you will be eligable to become a question-guru</p>
+                    {eligibilityCheck(role,quizDoneAmount)}
                 </section>
             </section>
         </Wrapper>

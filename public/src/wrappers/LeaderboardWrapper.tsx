@@ -23,6 +23,7 @@ const Wrapper = styled.main`
         display: flex;
         justify-content: space-between;
         max-width: 900px;
+        height: 195px;
         padding: 1rem;
         align-items: center;
         border: 1px solid var(--primary-black);
@@ -60,7 +61,7 @@ const Wrapper = styled.main`
        background:#C0C0C0;
     }
     .place3{
-      background: brown;
+      background: #7F735F;
     }
     @media screen and (min-width:980px){
         h2{

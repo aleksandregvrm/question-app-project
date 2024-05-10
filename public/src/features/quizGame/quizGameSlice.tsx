@@ -20,7 +20,7 @@ type InitialQuizType = {
 }
 const initialState: InitialQuizType = {
     isLoading: false,
-    quizType: "History",
+    quizType: "",
     quizMode: false,
     quizDone: false,
     quizState: false,
@@ -37,7 +37,6 @@ const checkPermission = createAsyncThunk("quizGameSlice/quizPermission", async (
         const response = await customFetch.get('/quizStats/checkQuizPermission');
         return { data: response.data }
     } catch (error: any) {
-        // toast.error(error.response.data.msg)
         throw error;
     }
 });
@@ -82,6 +81,10 @@ const quizGameSlice = createSlice({
             }
             state.answeredQuestions.push({ answerSubmitted, answerIsTrue, question });
         },
+        saveCategory : (state,action) => {
+            const categorySelected:string = action.payload;
+            state.quizType = categorySelected;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getQuestion.pending, (state) => {
@@ -103,8 +106,10 @@ const quizGameSlice = createSlice({
         builder.addCase(sendEvaluatedStats.pending, (state) => {
             state.isLoading = true;
         });
-        builder.addCase(sendEvaluatedStats.fulfilled, (_, action) => {
-            console.log(action.payload);
+        builder.addCase(sendEvaluatedStats.fulfilled, (state) => {
+            if(state.quizDone){
+                return {...initialState}
+            }
         });
         builder.addCase(sendEvaluatedStats.rejected, (state) => {
             state.isLoading = false;
@@ -116,7 +121,8 @@ const quizGameSlice = createSlice({
     }
 });
 export const {
-    evaluateQuestion
+    evaluateQuestion,
+    saveCategory
 } = quizGameSlice.actions;
 export { getQuestion, sendEvaluatedStats, checkPermission };
 export default quizGameSlice.reducer;

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/helperFunctions";
-import { getUserFromLocalStorage, addUserToLocalStorage, removeUserFromLocalStorage } from "../../utils/localStorage";
+import { getUserFromLocalStorage,addItemToLocalStorage,removeItemFromLocalStorage } from "../../utils/localStorage";
 import { toast } from "react-toastify";
 
 export type LoginActionType = {
@@ -37,7 +37,7 @@ const loginUser = createAsyncThunk(
                 email,
                 password,
             });
-            addUserToLocalStorage(response.data.user)
+            addItemToLocalStorage(response.data.user,"user");
             return { data: response.data };
         } catch (error: any) {
             const errorMessage = error.response.data.msg;
@@ -51,7 +51,7 @@ const logoutUser = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             await customFetch.delete("/auth/logout");
-            removeUserFromLocalStorage();
+            removeItemFromLocalStorage("user");
         } catch (error: any) {
             const errorMessage = error.message;
             return thunkAPI.rejectWithValue(errorMessage);
