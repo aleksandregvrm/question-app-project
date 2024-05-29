@@ -12,20 +12,20 @@ const {
 const router = express.Router();
 
 router.route("/").get(
-  // authenticateUser,
-  // authorizePermissions("admin", "user", "question-guru"),
+  authenticateUser,
+  authorizePermissions("admin", "user", "question-guru"),
   getQuizStats
 );
 router
   .route("/checkQuizPermission")
   .get(
-    // authenticateUser,
-    // authorizePermissions("admin", "user", "question-guru"),
+    authenticateUser,
+    authorizePermissions("admin", "user", "question-guru"),
     checkQuizPermission
   );
 router.route("/evaluate").post(
-  // authenticateUser,
-  // authorizePermissions("admin", "user", "question-guru"),
+  authenticateUser,
+  authorizePermissions("admin", "user", "question-guru"),
   evaluateQuizStats
 );
 router.route("/leaderboard").get(getLeaderBoardStats);
