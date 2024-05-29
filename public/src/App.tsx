@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,QuizCategory,QuizGameOn} from "./pages";
+import {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,QuizCategory,QuizGameOn,AdminPage,SingleQuizStat,ProtectedRoute} from "./pages";
 import Error from "./errors/Error";
 
 const router = createBrowserRouter([
@@ -22,6 +22,22 @@ const router = createBrowserRouter([
         path:"authorization",
         element:<Authorization/>,
         errorElement:<Error/>
+      },
+      {
+        path:"admin",
+        errorElement:<Error/>,
+        children:[
+          {
+            index:true,
+            element: <ProtectedRoute children={<AdminPage />} />,
+            errorElement: <Error />,
+          },
+          {
+            path:"singleQuizStat",
+            element: <ProtectedRoute children={<SingleQuizStat />}/>,
+            errorElement:<Error/>
+          }
+        ]
       },
       {
         path:"user/verify-email",

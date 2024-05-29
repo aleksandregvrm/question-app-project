@@ -1,6 +1,17 @@
 import { MouseEvent, ChangeEvent } from "react"
 import { AnswerType, QuestionSubmitInitialStateType } from "../utils/helperFunctions"
 
+// Initial State for the QuestionSlice
+export type InitialQuizType = {
+    allQuestions: QuestionSubmitInitialStateType[],
+    search: string,
+    page: number,
+    questionType: string,
+    questionEditingId: string,
+    isLoading: boolean,
+}
+// Initial State for the QuestionSlice End
+
 // Questions 
 export interface AllQuestionInputsInter {
     questionEditingId: string,

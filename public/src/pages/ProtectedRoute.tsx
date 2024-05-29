@@ -1,8 +1,16 @@
+import { Navigate } from "react-router-dom";
+import { useReduxSelector } from "../store";
+import { ReactNode } from "react";
 
-const ProtectedRoute = () => {
-  return (
-    <div>ProtectedRoute</div>
-  )
+interface ProtectedRouteInter {
+  children:ReactNode
 }
 
-export default ProtectedRoute
+const ProtectedRoute = ({children}:ProtectedRouteInter):ReactNode => {
+  const { role} = useReduxSelector((store) => store.user);
+  if (role !== "admin") {
+    return <Navigate to="/" />;
+  }
+  return children;
+};
+export default ProtectedRoute;

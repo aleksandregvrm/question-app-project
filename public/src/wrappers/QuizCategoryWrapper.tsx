@@ -18,7 +18,7 @@ const Wrapper = styled.main`
         border: 1px solid var(--primary-black);
     }
     h4{
-      color:red;
+      color:var(--primary-Company-red);
     }
     
 `

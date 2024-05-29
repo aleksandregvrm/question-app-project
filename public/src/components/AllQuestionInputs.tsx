@@ -49,7 +49,7 @@ const AllQuestionInputs = ({ questionEditingId, editButtonHandler, handleChange,
                                         key={answerIndex}
                                         type='text'
                                         value={option}
-                                        style={{ background: `${isCorrect && "green"}` }}
+                                        style={{ background: `${isCorrect && "#3cb371"}` }}
                                     />
                                 );
                             })
@@ -64,7 +64,7 @@ const AllQuestionInputs = ({ questionEditingId, editButtonHandler, handleChange,
                                         disabled={questionEditingId !== id}
                                         type='text'
                                         value={option}
-                                        style={{ background: `${isCorrect && "green"}` }}
+                                        style={{ background: `${isCorrect && "#3cb371"}` }}
                                     />
                                 );
                             })

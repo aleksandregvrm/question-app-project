@@ -1,35 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/helperFunctions";
-import { QuestionSubmitInitialStateType } from "../../utils/helperFunctions";
-import { QuestionType } from "../quizStats/quizStatsSlice";
+import { InitialQuizGameType } from "../../types/quizGameTypes";
+import { QuestionType } from "../../types/quizStatTypes";
 import { toast } from "react-toastify";
+import { addItemToLocalStorage,checkForItemInLocalStorage,removeItemFromLocalStorage,getItemFromLocalStorage, getObjectFromLocalStorage } from "../../utils/localStorage";
 
-type InitialQuizType = {
-    isLoading: boolean,
-    quizType: string,
-    quizMode: boolean,
-    quizDone: boolean,
-    quizState: boolean
-    activeQuestion: QuestionSubmitInitialStateType[],
-    answeredQuestions: QuestionType[],
-    activeCorrectAnswer: string,
-    correctAnswers: number,
-    maxQuestions: number,
-    answersSubmitted: number,
-    questionIsLoading: boolean,
-}
-const initialState: InitialQuizType = {
+const initialState: InitialQuizGameType = {
     isLoading: false,
-    quizType: "",
+    quizType: getItemFromLocalStorage("category"),
     quizMode: false,
     quizDone: false,
     quizState: false,
     activeQuestion: [],
-    answeredQuestions: [],
+    answeredQuestions: getObjectFromLocalStorage("questionsUsed"),
     activeCorrectAnswer: "",
-    correctAnswers: 0,
+    correctAnswers: Number(getItemFromLocalStorage("correctAnswers")),
     maxQuestions: 10,
-    answersSubmitted: 0,
+    answersSubmitted: Number(getItemFromLocalStorage("answersSubmitted")),
     questionIsLoading: false,
 };
 const checkPermission = createAsyncThunk("quizGameSlice/quizPermission", async () => {
@@ -44,7 +31,7 @@ const getQuestion = createAsyncThunk(
     "quizGameSlice/quizQuestion",
     async (_, thunkAPI) => {
         try {
-            const state = thunkAPI.getState() as { quizGame: InitialQuizType };
+            const state = thunkAPI.getState() as { quizGame: InitialQuizGameType };
             const { quizType, quizMode } = state.quizGame;
             const response = await customFetch.get(`/questions?quizMode=${quizMode}&questionType=${quizType}`);
             return { data: response.data }
@@ -58,13 +45,11 @@ const sendEvaluatedStats = createAsyncThunk(
     "quizGameSlice/evaluateQuizStats",
     async (_, thunkAPI) => {
         try {
-            console.log('evaluation is being sent');
-            const state = thunkAPI.getState() as { quizGame: InitialQuizType };
+            const state = thunkAPI.getState() as { quizGame: InitialQuizGameType };
             const { answeredQuestions, correctAnswers, quizDone } = state.quizGame;
             const response = await customFetch.post(`/quizStats/evaluate`, { quizCorrectAnswers: correctAnswers, usedQuestions: answeredQuestions, quizDone });
             return { data: response.data }
         } catch (error: any) {
-            // toast.error(error.response.data.msg)
             throw error;
         }
     }
@@ -76,14 +61,21 @@ const quizGameSlice = createSlice({
         evaluateQuestion: (state, action) => {
             const { answerSubmitted, answerIsTrue, question }: QuestionType = action.payload;
             state.answersSubmitted++;
+            addItemToLocalStorage(state.answersSubmitted,"answersSubmitted");
             if (answerIsTrue) {
                 state.correctAnswers++;
-            }
+                addItemToLocalStorage(state.correctAnswers,"correctAnswers")
+            };
             state.answeredQuestions.push({ answerSubmitted, answerIsTrue, question });
+            addItemToLocalStorage(state.answeredQuestions,"questionsUsed");
         },
         saveCategory : (state,action) => {
+            if(checkForItemInLocalStorage("category")){
+                return
+            }
             const categorySelected:string = action.payload;
             state.quizType = categorySelected;
+            addItemToLocalStorage(categorySelected,"category");
         }
     },
     extraReducers: (builder) => {
@@ -94,6 +86,7 @@ const quizGameSlice = createSlice({
             if (state.answersSubmitted === 10) {
                 state.isLoading = false;
                 state.quizDone = true;
+                addItemToLocalStorage(state.quizDone,"quizDoneStatus")
             } else {
                 const { data: { questions } } = action?.payload;
                 state.activeQuestion = questions;
@@ -108,6 +101,11 @@ const quizGameSlice = createSlice({
         });
         builder.addCase(sendEvaluatedStats.fulfilled, (state) => {
             if(state.quizDone){
+                removeItemFromLocalStorage("answersSubmitted");
+                removeItemFromLocalStorage("category");
+                removeItemFromLocalStorage("correctAnswers");
+                removeItemFromLocalStorage("questionsUsed");
+                removeItemFromLocalStorage("quizDoneStatus");
                 return {...initialState}
             }
         });

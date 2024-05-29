@@ -6,11 +6,11 @@ const CustomError = require("../errors");
 
 // Check for quiz permission
 const checkQuizPermission = async (req, res) => {
-  const {userId:id} = req.user;
-  // const temporaryId = "65c7a042f0b9c4c22bf29ca2";
+  // const {userId:id} = req.user;
+  const temporaryId = "65c7a042f0b9c4c22bf29ca2";
   // Temporary solution
   const dayNow = new Date().getDate();
-  const personalQuizStats = await QuizStats.findOne({ user: id });
+  const personalQuizStats = await QuizStats.findOne({ user: temporaryId });
   if (!personalQuizStats) {
     res.status(StatusCodes.OK).json({ msg: "Proceed!" });
   }
@@ -19,7 +19,7 @@ const checkQuizPermission = async (req, res) => {
     lastQuizResult: { lastQuizDoneDate },
   } = personalQuizStats;
   const lastQuizDay = lastQuizDoneDate.getDate();
-  if (dailyQuizAmount !== 2) {
+  if (dailyQuizAmount !== 4) {
     res.status(StatusCodes.OK).json({ msg: "Proceed!" });
   }
   if (dayNow === lastQuizDay) {
@@ -37,11 +37,11 @@ const checkQuizPermission = async (req, res) => {
 const evaluateQuizStats = async (req, res) => {
   const { quizCorrectAnswers, usedQuestions, quizDone } = req.body;
   // temporary solution !!!!!!!
-  // let name = "aleksandregvrm";
-  // let role = "admin";
-  // let id = "65c7a042f0b9c4c22bf29ca2";
+  let name = "aleksandregvrm";
+  let role = "admin";
+  let id = "65c7a042f0b9c4c22bf29ca2";
   // temporary solution !!!!!!!!
-  const { userId: id, name, role } = req.user;
+  // const { userId: id, name, role } = req.user;
   // real solution
   let personalQuizStats = await QuizStats.findOne({ user: id });
   if (!personalQuizStats) {
@@ -82,10 +82,10 @@ const evaluateQuizStats = async (req, res) => {
 };
 // Get personal Quiz Stats
 const getQuizStats = async (req, res) => {
-  const { userId: id } = req.user;
+  // const { userId: id } = req.user;
   // console.log(req.user);
   // real solution
-  // const id = "65c7a042f0b9c4c22bf29ca2";
+  const id = "65c7a042f0b9c4c22bf29ca2";
   // TEMPORARY SOLUTION !!!!!!
   // change this on production !!!!!
   const personalQuizStats = await QuizStats.findOne({ user: id });

@@ -1,19 +1,24 @@
 import Wrapper from "../wrappers/QuizCategoryWrapper";
 import { categoryImagesArr } from "../utils/otherStats";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { reduxDispatch, useReduxSelector } from "../store";
 import { checkPermission, sendEvaluatedStats, saveCategory } from "../features/quizGame/quizGameSlice";
 
 const QuizCategories = () => {
-  const { quizState } = useReduxSelector((store) => store.quizGame);
+  const { quizState,quizDone} = useReduxSelector((store) => store.quizGame);
   const dispatch = reduxDispatch();
   useEffect(() => {
     dispatch(checkPermission());
   }, [])
+  if(quizDone){
+    return <Navigate to="game-on"/>
+  }
   const categoryClickHandler = (category: string) => {
-    dispatch(saveCategory(category))
-    dispatch(sendEvaluatedStats())
+    if(quizState){
+      dispatch(saveCategory(category))
+      dispatch(sendEvaluatedStats())
+    }
   }
   return (
     <Wrapper>

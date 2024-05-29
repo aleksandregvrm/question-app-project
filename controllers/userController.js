@@ -222,7 +222,8 @@ const resetPassword = async (req, res) => {
   );
 };
 const deleteUser = async (req, res) => {
-  const id = "65cb48cd46297490a305f828";
+  const {id} = req.query;
+  console.log(id);
   const user = await User.findOne({ _id: id });
   const token = await Token.findOne({ user: id });
   if (token) {

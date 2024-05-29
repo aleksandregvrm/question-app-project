@@ -35,5 +35,24 @@ export const userText = (quizDoneAmount: number): string => {
 }
 // Users summary End
 
+export const singleObj = {
+  _id: "",
+  averageQuizValue: 0,
+  createdAt: "",
+  dailyQuizAmount: 0,
+  lastQuizResult: {
+    _id: "",
+    lastQuizCorrectAnswers: 0,
+    lastQuizDoneDate: "",
+    questionsUsed: []
+  },
+  name: "",
+  quizDoneAmount: 0,
+  role: "",
+  totalQuizPoints: 0,
+  updatedAt: "",
+  user: ""
+}
+
 
 

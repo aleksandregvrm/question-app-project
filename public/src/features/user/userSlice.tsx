@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/helperFunctions";
-import { getUserFromLocalStorage,addItemToLocalStorage,removeItemFromLocalStorage } from "../../utils/localStorage";
+import { getObjectFromLocalStorage,addItemToLocalStorage,removeItemFromLocalStorage } from "../../utils/localStorage";
 import { toast } from "react-toastify";
 
 export type LoginActionType = {
@@ -21,11 +21,11 @@ export type InitialStateType = {
 }
 const initialState: InitialStateType = {
     isLoading: false,
-    role: getUserFromLocalStorage().role,
+    role: getObjectFromLocalStorage("user").role,
     message: "",
-    name: getUserFromLocalStorage().name,
-    email: getUserFromLocalStorage().email,
-    userId: getUserFromLocalStorage().userId,
+    name: getObjectFromLocalStorage("user").name,
+    email: getObjectFromLocalStorage("user").email,
+    userId: getObjectFromLocalStorage("user").userId,
     isLoggedIn: false,
     feedbackState: false,
 };

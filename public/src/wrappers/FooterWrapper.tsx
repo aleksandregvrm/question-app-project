@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import footerImg from "../assets/animation-library.png";
+import booksFooterImg from "../assets/books.png"
 
 const Wrapper = styled.footer`
-margin-top: 2rem;
+  margin-top: 2rem;
   padding: 1rem;
-  position: relative;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${footerImg});
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${booksFooterImg});
   background-size: cover;
   h2 {
     color: var(--primary-white);
@@ -16,7 +15,15 @@ margin-top: 2rem;
     text-align: center;
     opacity: 0.8;
   }
-  .message-admin {
+  ul{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 50px 50px;
+  }
+   .message-admin {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -34,9 +41,15 @@ margin-top: 2rem;
     border-radius: 1.5rem;
     padding: 0.5rem;
     border: 0.5px solid var(--primary-white);
-  }
+  } 
   .footer-text {
     display: none;
+  }
+  .copy-text{
+    /* position: absolute; */
+    color: white;
+    top: 1rem;
+    right: 1rem;
   }
   form {
     display: flex;
@@ -59,9 +72,6 @@ margin-top: 2rem;
   }
   @media screen and (min-width: 890px) {
     background-size: contain;
-    h2 {
-      background: none;
-    }
     .footer-text {
       padding: 0 0.2rem;
       display: inline-block;

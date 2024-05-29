@@ -19,6 +19,6 @@ router.route("/logout").delete(authenticateUser, logoutUser);
 router.route("/change-user").patch(authenticateUser,changeUser);
 router.route("/change-password").post(changePassword);
 router.route("/reset-password").post(resetPassword);
-router.route("/delete-user").delete(authenticateUser,deleteUser);
+router.route("/delete-user").delete(deleteUser);
 
 module.exports = router;

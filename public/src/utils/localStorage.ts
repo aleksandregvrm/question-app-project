@@ -1,4 +1,5 @@
 import { LoginActionType } from "../features/user/userSlice";
+import { QuestionType } from "../types/quizStatTypes";
 
 export const checkForItemInLocalStorage = (item: string): boolean => {
     const result = localStorage.getItem(item);
@@ -8,7 +9,7 @@ export const checkForItemInLocalStorage = (item: string): boolean => {
     return false
 }
 
-export const addItemToLocalStorage = (item: string | LoginActionType, storageName: string) => {
+export const addItemToLocalStorage = (item: string | number | boolean | LoginActionType | QuestionType[], storageName: string) => {
     localStorage.setItem(storageName, JSON.stringify(item));
 };
 
@@ -16,21 +17,19 @@ export const removeItemFromLocalStorage = (item: string) => {
     return localStorage.removeItem(item);
 };
 
-// User Specific
-export const getUserFromLocalStorage = (): LoginActionType => {
-    const result = localStorage.getItem("user");
-    const user: LoginActionType = result ? JSON.parse(result) : '';
-    return user;
-};
-// User Specific End
+export const getObjectFromLocalStorage = <T extends LoginActionType & QuestionType[]>(storageName:string) : T => { 
+    const result = localStorage.getItem(storageName);
+    const obj:T = result ? JSON.parse(result) : [];
+    return obj;
+}
 
-// Quiz Game Specific
-export const getCategoryFromLocalStorage = (): string => {
-    const result = localStorage.getItem("category");
-    const retrievedItem: string = result ? JSON.parse(result) : '';
+export const getItemFromLocalStorage = <T extends string & boolean>(item:string): T => {
+    const result = localStorage.getItem(item);
+    let retrievedItem:T;
+    retrievedItem = result ? JSON.parse(result) : '';
+    if(retrievedItem === "true"){
+      return JSON.parse(retrievedItem)
+    }
     return retrievedItem;
 }
-// Quiz Game Specific End
 
-
-// USER RELATED

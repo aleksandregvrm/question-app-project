@@ -48,7 +48,7 @@ const QuizStatsSchema = new mongoose.Schema(
       required: [true, "Please provide how many quiz have you done"],
       validate: {
         validator: function (value) {
-          return value <= 2;
+          return value <= 4;
         },
         message: "Daily quiz amount must not be more than 2",
       },

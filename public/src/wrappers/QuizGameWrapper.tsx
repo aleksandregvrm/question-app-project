@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.main`
-padding: 1rem;
+    padding: 1rem;
     min-height: 700px;
     display: flex;
     justify-content: center;
@@ -32,7 +32,7 @@ padding: 1rem;
     }
     button{
         width: 240px;
-        height: 60px;
+        min-height: 60px;
         font-size: 1.3rem;
     }
     h3{

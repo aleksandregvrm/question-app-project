@@ -1,16 +1,8 @@
-import { LeaderboardType } from "../features/quizStats/quizStatsSlice";
-import adminIMG from "../assets/admin.png";
-import userIMG from "../assets/user.png";
-import questionGuruIMG from "../assets/guru.png";
+import { LeaderboardType } from "../types/quizStatTypes";
+import { generateIMG } from "../utils/helperFunctions";
 
 const LeaderboardStats = ({ name, role, quizDoneAmount, averageQuizValue, place } : LeaderboardType) => {
-  let usedPhoto:string = userIMG
-  if(role === 'admin'){
-    usedPhoto = adminIMG;
-  }
-  if(role === "question-guru"){
-    usedPhoto = questionGuruIMG;
-  }
+  const usedPhoto = generateIMG(role)
   return (
     <div className={`leaderboard-list-container place${place}`}>
        <div className="name-img">

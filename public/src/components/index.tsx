@@ -8,4 +8,5 @@ import ProfileForm from "./ProfileForm";
 import QuestionSubmitForm from "./QuestionSubmitForm";
 import AllQuestionsLoaded from "./AllQuestionsLoaded";
 import AllQuestionFilters from "./AllQuestionFilters";
-export {Navbar,Footer,LoginStatus,Loading,ProfileDetails, LeaderboardStats,ProfileForm,QuestionSubmitForm,AllQuestionsLoaded,AllQuestionFilters};
+import AllQuizStats from "./AllQuizStats";
+export {Navbar,Footer,LoginStatus,Loading,ProfileDetails,LeaderboardStats,ProfileForm,QuestionSubmitForm,AllQuestionsLoaded,AllQuestionFilters,AllQuizStats};

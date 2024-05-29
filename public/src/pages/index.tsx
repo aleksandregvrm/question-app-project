@@ -11,4 +11,6 @@ import AllQuestions from "./AllQuestions";
 import ProtectedRoute from "./ProtectedRoute";
 import QuizCategory from "./QuizCategory";
 import QuizGameOn from "./QuizGameOn";
-export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute,QuizCategory,QuizGameOn};
+import AdminPage from "./AdminPage";
+import SingleQuizStat from "./SingleQuizStat";
+export {HomeLayout,HomePage,Profile,Authorization,Verification,ResetPassword,Leaderboard,AddQuestion,About,AllQuestions,ProtectedRoute,QuizCategory,QuizGameOn,AdminPage,SingleQuizStat};

@@ -1,38 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/helperFunctions";
-export type QuestionType = {
-    question?: string,
-    answerSubmitted: string,
-    answerIsTrue: boolean,
-    id?:string,
-}
-type lastQuizResult = {
-    lastQuizCorrectAnswers: number,
-    lastQuizDoneDate: Date | null,
-    questionsUsed: QuestionType[],
-}
-export type LeaderboardType = {
-    name:string,
-    role:string,
-    quizDoneAmount:number, 
-    averageQuizValue:number, 
-    place:number,
-    id:string,
-}
-type InitialQuizStatsType = {
-    quizDone: number,
-    quizDoneAmount: number,
-    totalQuizPoints: number,
-    averageQuizValue: number,
-    lastQuizResult: lastQuizResult,
-    detailsOpen: boolean,
-    isLoading:boolean,
-    leaderboard:LeaderboardType[],
-    leaderboardIsLoading:boolean,
-    leaderboardListPart:number,
-    disableLoadMoreButton:boolean,
-}
-const initialLastQuizResult: lastQuizResult = {
+import { InitialQuizStatsType,lastQuizResultType } from "../../types/quizStatTypes"; 
+
+const initialLastQuizResult: lastQuizResultType = {
     lastQuizCorrectAnswers: 0,
     lastQuizDoneDate: null,
     questionsUsed: [

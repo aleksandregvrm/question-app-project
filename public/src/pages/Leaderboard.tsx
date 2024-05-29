@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { reduxDispatch, useReduxSelector } from "../store"
-import { LeaderboardType, getLeaderboard, loadMoreList } from "../features/quizStats/quizStatsSlice"
+import { getLeaderboard, loadMoreList } from "../features/quizStats/quizStatsSlice";
+import { LeaderboardType } from "../types/quizStatTypes";
 import Wrapper from "../wrappers/LeaderboardWrapper";
 import leaderboardIMG from "../assets/leaderboardpage.png";
 import { LeaderboardStats, Loading } from "../components";

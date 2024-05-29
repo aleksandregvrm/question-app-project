@@ -3,15 +3,8 @@ import { customFetch } from "../../utils/helperFunctions";
 import { QuestionSubmitInitialStateType } from "../../utils/helperFunctions";
 import { toast } from "react-toastify";
 import { FilterStateType } from "../../utils/helperFunctions";
+import { InitialQuizType } from "../../types/quetionTypes";
 
-type InitialQuizType = {
-    allQuestions: QuestionSubmitInitialStateType[],
-    search: string,
-    page: number,
-    questionType: string,
-    questionEditingId: string,
-    isLoading: boolean,
-}
 const initialState: InitialQuizType = {
     allQuestions: [],
     search: "",

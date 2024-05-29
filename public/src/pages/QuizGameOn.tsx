@@ -7,9 +7,9 @@ import { Loading } from "../components";
 import { getQuestion, evaluateQuestion, sendEvaluatedStats } from "../features/quizGame/quizGameSlice";
 import { AnswerType } from "../utils/helperFunctions";
 import { NavLink } from "react-router-dom";
-import { QuestionType } from "../features/quizStats/quizStatsSlice";
+import { QuestionType } from "../types/quizStatTypes";
 
-const initialValue: number = 10;
+const initialValue: number = 12;
 const QuizPage = () => {
   const [quizLoading, setQuizLoading] = useState<boolean>(true);
   const [timerValue, setTimerValue] = useState<number>(initialValue);

@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+
+const scaleAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+`;
 
 const Wrapper = styled.main`
     display: flex;
@@ -32,6 +42,15 @@ const Wrapper = styled.main`
     }
     button{
         margin-top: 1rem;
+    }
+    .admin-button{
+        background: var(--primary-Company-red);
+        animation: ${scaleAnimation} 2s infinite alternate-reverse;
+    }
+    .user-ability{
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
     }
     .user-stats{
         margin-top: 2rem;

@@ -1,6 +1,9 @@
 import { MouseEvent, ChangeEvent } from "react"
-import { adminText,questionGuruText,userText } from "./otherStats";
+import { adminText, questionGuruText, userText } from "./otherStats";
 import axios from "axios";
+import adminIMG from "../assets/admin.png";
+import userIMG from "../assets/user.png";
+import questionGuruIMG from "../assets/guru.png";
 
 // Input Textarea onChange
 export type InitialStateType = {
@@ -63,7 +66,7 @@ export const setAuth = (e: MouseEvent<HTMLElement>, setAuthType: React.Dispatch<
 };
 // Handle Change Inputs End
 // Change Auth Type
-const productionURL: string = "/api/v1";
+const productionURL: string = "http://localhost:5002/api/v1";
 
 export const customFetch = axios.create({
     baseURL: productionURL
@@ -103,19 +106,19 @@ export const handleAnswerChange = (e: ChangeEvent<HTMLInputElement>, index: numb
 // Additional functions regarding the Quiz stats...
 
 export const evaluateLastQuizPoints = (num: number): string => {
-    if(num === 0){
+    if (num === 0) {
         return 'TBD'
     }
     if (num <= 4) {
         return 'Horrible Performance'
     }
-    if(num <= 6){
+    if (num <= 6) {
         return 'Average Performance'
     }
-    if(num <=8){
+    if (num <= 8) {
         return 'Great Performance'
     }
-    if(num === 9){
+    if (num === 9) {
         return 'Almost Perfect'
     }
     return 'Superb Performance'
@@ -125,16 +128,58 @@ export const evaluateLastQuizPoints = (num: number): string => {
 
 // Quizing Eligibility check
 
-export const eligibilityCheck = (role:string,quizDoneAmount:number):string => {
-  if(role === 'admin'){
-    return adminText
-  }
-  if(role === 'question-guru'){
-    return questionGuruText
-  }
-  return userText(quizDoneAmount)
+export const eligibilityCheck = (role: string, quizDoneAmount: number): string => {
+    if (role === 'admin') {
+        return adminText
+    }
+    if (role === 'question-guru') {
+        return questionGuruText
+    }
+    return userText(quizDoneAmount)
 }
 
 // Quizing Eligibility check End
 
 
+// Formatting Date
+export const formatDateToNumber = (dateString:Date):number => {
+    const date = new Date(dateString);
+    const currentDate = new Date();
+    const timeDifference = currentDate.getTime() - date.getTime();
+    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    return daysDifference
+}
+export const formatDateDays = (dateString: Date): string => {
+    const daysDifference = formatDateToNumber(dateString);
+    if(daysDifference === 0){
+        return "Today"
+    }
+    return `${daysDifference} days ago`;
+}
+// Formatting Date End
+
+// Needed image generating
+export const generateIMG = (role:string):string => {
+  if(role === "admin"){
+    return adminIMG
+  }
+  if(role === "question-guru"){
+    return questionGuruIMG
+  }
+  return userIMG
+}
+// Needed image generating
+
+// Quizer index calculator
+export const calculateQuizerIndex = (userCreation:Date,averageQuizPoint:number,quizDoneAmount:number):number => {
+  let quizerIndex:number = 0;
+  if(quizDoneAmount >= 10){
+      const userCreationIndex = 12.5 * (quizDoneAmount / formatDateToNumber(userCreation));
+      console.log(userCreationIndex);
+      const averageQuizPointIndex = averageQuizPoint * 5;
+      quizerIndex = userCreationIndex + averageQuizPointIndex;
+      return Math.ceil(quizerIndex);
+  }
+  return quizerIndex+2;
+}
+// Quizer index calculator End 
