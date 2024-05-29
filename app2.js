@@ -61,7 +61,6 @@ if (cluster.isMaster) {
   app.use(notFound);
   const port = 5002;
   const start = async () => {
-    console.log('something');
     try {
       await connectDB(process.env.MONGO_URI);
       app.listen(port, () => {
